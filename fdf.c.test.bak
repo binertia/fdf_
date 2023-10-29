@@ -1,0 +1,154 @@
+// #include "includes/fdf.h"
+//
+// typedef struct s_data
+// {
+// 	void *mlx;
+// 	void *win;
+// 	int x;
+// 	int y;
+// } t_data;
+//
+// int render_next_frame(t_data *data)
+// {
+// 	// Clear the window
+// 	mlx_clear_window(data->mlx, data->win);
+//
+// 	// Draw a square at the current (x, y) position
+// 	mlx_pixel_put(data->mlx, data->win, data->x, data->y, 0xFFFFFF);
+//
+// 	// Update the position for the next frame
+// 	data->x =
+// 		(data->x + 1) % 800; // Keep the x coordinate within the window width
+// 	data->y =
+// 		(data->y + 1) % 600; // Keep the y coordinate within the window height
+//
+// 	return (0);
+// }
+//
+// int main()
+// {
+// 	// Initialize MiniLibX and create a window
+// 	t_data data;
+// 	data.mlx = mlx_init();
+// 	data.win = mlx_new_window(data.mlx, 800, 600, "MiniLibX Example");
+//
+// 	// Initialize the position of the square
+// 	data.x = 0;
+// 	data.y = 0;
+//
+// 	// Register the render_next_frame function
+// 	mlx_loop_hook(data.mlx, (int (*)())render_next_frame, &data);
+//
+// 	// Start the event loop
+// 	mlx_loop(data.mlx);
+//
+// 	return 0;
+// }
+
+// take it as string >> then read >> if
+// 0000000000000000000 0000000000000000000
+// 0 010100 010100 0 0101010101000 0 0 0 10 10 0 0 10 10 0 0 0 0 0 0 0 10 10 0 0
+// 0 0 10 10 0 0 10 10 0 0 0 0 0 0 0 10 10 0 0 0 0101010101010000 01010101000 0
+// 0 0 0101010101000 010100 0 0 0 0 0 0 0 0 0 0 0 10 10 0 0 0 10 10 0 0 0 0 0 0
+// 0 0 0 0 0 010100 0 010101010101000 0000000000000000000
+// 0000000000000000000
+//
+// intmain()
+//	char *s line;
+//	if (ac == 2)
+//	{
+//
+//		while (1)
+//		res = split
+//		if (get_next_line(read(1, line)));
+//
+//		mlx_pixel_put()
+//		mlx_loop();
+//
+//	}
+//
+#include "includes/fdf.h"
+
+typedef struct s_data
+{
+	void *mlx;
+	void *win;
+	int x;
+	int y;
+	int color;
+} t_data;
+
+// while ( y <= y_max)
+// while (x)
+//	if (x == (x_fraction * y_iter))
+//		draw_point();
+
+void draw_line(t_data *data)
+{
+	int size = 250; // Size of the square
+
+	for (int i = 0; i < size; i++)
+	{
+		mlx_pixel_put(data->mlx, data->win, data->x+i , data->y +i, data->color);
+	}
+}
+
+int render_next_frame(t_data *data)
+{
+	// Clear the window
+	mlx_clear_window(data->mlx, data->win);
+
+	data->x = data->x + 2;
+	data->y = data->y + 2;
+	// Draw a square at the current (x, y) position
+	draw_line(data);
+
+	return (0);
+}
+
+// int	real_main()
+// {
+// 	if (ac == 2)
+// 	{
+// 		t_data data;
+// 		char **god;
+//
+// 		data.mlx = mlx_init();
+// 		data.win = mlx_new_window(data.mlx, 800, 600, "MiniLibX Example");
+// 		god = get_ac(av[1])
+// 		{
+// 			char *s;
+// 			if (-1 != get_next_line(stdin_fileno, s))
+// 				return (split(s));
+// 			else
+// 				return (0);
+// 		}
+// 		if(god)
+// 		{
+// 			//update god with
+// 		}
+// 		mlx_loop(data.mlx);
+// 	}
+// }
+
+int main(int ac, char *av[])
+{
+	// Initialize MiniLibX and create a window
+	t_data data;
+
+	data.mlx = mlx_init();
+	data.win = mlx_new_window(data.mlx, 800, 600, "MiniLibX Example");
+
+	// Initialize the position of the square
+	data.x = 200;
+	data.y = 300;
+	data.color = 0xFF0000;
+
+	// Register the render_next_frame function
+	mlx_loop_hook(data.mlx, render_next_frame, &data);
+
+	// Start the event loop
+	mlx_loop(data.mlx);
+
+	return 0;
+}
